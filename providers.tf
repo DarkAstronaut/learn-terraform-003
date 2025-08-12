@@ -12,9 +12,3 @@ provider "aws" {
   region  = "us-east-2"
   # profile = "Ghost_tf"
 }
-
-provider "aws" {
-  alias   = "west"
-  region  = "us-west-1"
-  # profile = "Ghost_tf"
-}

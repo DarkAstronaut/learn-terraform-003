@@ -1,18 +1,20 @@
-resource "aws_instance" "tf-ec2-instance-1" {
-  ami           = "ami-0169aa51f6faf20d5"
+/*
+The EC2 Instance - "FirstEC2Instance" created in AWS will be imported
+using 'terraform import' 
+
+- Get Instnace ID and use it with 
+    'terrafrom import aws_instance.my-existing-ec2 <Instance ID>'
+
+- Fill the details in resource block
+  - Use terraform state show aws_instance.myexisting-ec2 to get the details
+*/
+
+resource "aws_instance" "my-existing-ec2" {
+  # instance configuration
+  ami = "ami-08ca1d1e465fbfe0c"
   instance_type = "t3.micro"
 
   tags = {
-    Name = "demo-server-1"
-  }
-}
-
-resource "aws_instance" "tf-ec2-instancce-2" {
-  provider      = aws.west
-  ami           = "ami-06e11c4cc68c362dd" # For West Region (us-west-1)
-  instance_type = "t3.micro"
-
-  tags = {
-    Name = "demo-server-2"
+    Name = "FirstEC2Instance"
   }
 }
