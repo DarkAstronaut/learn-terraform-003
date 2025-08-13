@@ -9,6 +9,6 @@ terraform {
 
 provider "aws" {
   # Default Region and IAM User
-  region  = "us-east-2"
+  region = "us-east-2"
   # profile = "Ghost_tf"
 }
