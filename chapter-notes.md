@@ -43,6 +43,7 @@ Terraform Module can be published by signing in with GitHub Account in https://r
 - Collaboration: Enables team to work on componants without affecting other's code / work
 
 **Module Inputs**: Variables that are passed to a module to configure its behaviour
+
 **Module Output**: Values that a Module can return to main configuration which allows access to results or information from the module
 
 Chaining Modules: When Output of a module acts as imput of another module
