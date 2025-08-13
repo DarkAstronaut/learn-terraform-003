@@ -33,7 +33,7 @@ Modules can be loaded from local filesystem, remote sources (VCS, Terraform Clou
 
 ### _Publishing a Module in Terraform Registry_
 
-Terraform Module can be published by signing in with GitHub Account in https://registry.terraform.io and selecct the repository that has the files for the publishing module
+Terraform Module can be published by signing in with GitHub Account in https://registry.terraform.io and select the repository that has the files for the publishing module
 
 ### Uses of Modules
 
@@ -41,3 +41,8 @@ Terraform Module can be published by signing in with GitHub Account in https://r
 - Modularization: Easy to organize and maintain code / breaking complex structure into simple individual componants
 - Standardization: Company-wise same infrastructure componants / helps in maintaing orgaizational policies
 - Collaboration: Enables team to work on componants without affecting other's code / work
+
+**Module Inputs**: Variables that are passed to a module to configure its behaviour
+**Module Output**: Values that a Module can return to main configuration which allows access to results or information from the module
+
+Chaining Modules: When Output of a module acts as imput of another module
