@@ -1,49 +1,46 @@
-# Terraform Modules
+# Terraform Core Workflow
 
-### Challenges with single directory
+Terraform Workflow makes sure that the infrastructure is provisioned in controlled and reproducable manner.
 
-- Increased Complexity for understanding and navigating config file
-- Risk with making changes
-- Copying can lead to errors and difficult to maintain
-- Can also lead to duplicate resource creation
+## Core Workflpw Steps:
 
-These challenges can be addressed with Terraform Modules
+- Write - Infrasturcture Code
+- Plan - Preview Changes
+- Apply - Make Changes
 
-**Module** - A directory with collection of Terraform Code
-"_A Terraform module is a set of Terraform configuration files in a single directory_" - HashiCorp Terraform Documentation
+The actual implementation is as follows:
 
-### Module Structure
+### As Individual User
 
-Basic Module structure consists of following files:
+1. _Write Configuration File_ which acts as blueprint for the infrastructure that is being created
 
-- LICENSE
-- README.md
-- main.tf
-- variables.tf
-- outputs.tf
-  This directory (from which the Terraform commands are executed) would become Root Module
+- _Initialize Working Directory_ with `terraform init` which downloads the required plugins, providers,
 
-### Types of Modules
+2.  _Run_ `terraform plan` to review all the changes that are being made to the infrastructure and verify if changes align with the goals (also add Version Control with `git add` or `git commit` on the main.tf file)
+3.  _Run_ `terraform apply` to perform the actions for creating or changing infrastructue by terraform
 
-- Root Module: Primary Configuration File
-- Child Module: Resuable Componants/Configurations
-- Published Modules: Shared Terraform Modules (found in Registry)
+- _Push to Repository_ with `git push` to move code to Remote SCM.
 
-Modules can be loaded from local filesystem, remote sources (VCS, Terraform Cloud, HTTPS URLs, Enterprise Private Module registries)
+After the code (`main.tf` or other file) is written, `terraform init` command is run. This command performs
 
-### _Publishing a Module in Terraform Registry_
+- Backend Initialization, which creates storage space for _state_ file keeps the track of the resources
+- Provider Initialization, gets cloud provider plugins required for resource creation and modification
+- Module Installation, (if applicable) download and installs module dependencies from configuration
+- Plugin Initialization, initize all the plugins from providers for interaction with cloud APIs
+- Authentication and Authorization, check credentials
+- Environment Validation,to check if everything is up and ready to use
+- `.terraform` subdirectory had provider plugins and modules
+- `.terraform.lock.hcl` contains version constraints from proivders to maintain consistency across Terraform commands and environment
 
-Terraform Module can be published by signing in with GitHub Account in https://registry.terraform.io and select the repository that has the files for the publishing module
+After initializing, before checking the plan, `terraform validate` command can be used to check for syntax errors and it shows if there are any problems with the file. `terraform fmt` can be used to format the code files to Terraform standards if indent and blocks to maintain consistency and improve readability
 
-### Uses of Modules
+With `terraform plan`, the tasks that the Terraform will perform is provided. Terraform compares the existing resources and gets this execution plan details with state file.
 
-- Code Reusability: Reduces duplication and helps in maintaining consistency
-- Modularization: Easy to organize and maintain code / breaking complex structure into simple individual componants
-- Standardization: Company-wise same infrastructure componants / helps in maintaing orgaizational policies
-- Collaboration: Enables team to work on componants without affecting other's code / work
+After reviewing the plan, `terraform apply` command is used to create / modify the resources following the plan. Then terraform state file will be updated which contains all the changes on the reosurces. _Note:_ `terraform state list` _command can be used to see the list of the resources present in the state file_
 
-**Module Inputs**: Variables that are passed to a module to configure its behaviour
+As part of the workflow, there are times when resources needds to be removed after its usage. This is need to manaage the costs. This can be achieved with `terraform destroy`. This command clears all the resources that are created. It shows the changes that are made (destruction of the resources) and this changes are updated in state file
 
-**Module Output**: Values that a Module can return to main configuration which allows access to results or information from the module
+## With Terraform Cloud
 
-Chaining Modules: When Output of a module acts as imput of another module
+- **Terraform Cloud** is service hosted at https://app.terraform.io helps teams to use Terraform together as group
+- Provides secure hub for **input variables** and **state** where team can initialize and run configurations with CLI remotely basedd to the state file and variables stored on Terraform Cloud
