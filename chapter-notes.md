@@ -44,3 +44,52 @@ As part of the workflow, there are times when resources needds to be removed aft
 
 - **Terraform Cloud** is service hosted at https://app.terraform.io helps teams to use Terraform together as group
 - Provides secure hub for **input variables** and **state** where team can initialize and run configurations with CLI remotely basedd to the state file and variables stored on Terraform Cloud
+
+# Terraform State
+
+**Terraform State** is record of resources that Terraform in managing, including the metadata and the configuration details of the resources
+
+- Terraform uses state file to track changes and make updates to the infrastructure.
+- After applying, Terraform creates `terraform.tfstate` (state file)
+
+## Terraform State Storage Loactions
+
+### Local Backend
+
+State file saves in local system
+
+1. **Advantages**
+
+- _Simplicity_: Doesn't need additional configurations to access state file and setting up state file is easy
+- _Speed_: Quickly accessable and suitable to small scale projects
+
+2.  **Disadvantages**, when working as team
+
+- _Lack of Collaboration_, making it difficult to share, collaborate the state file, which could lead to errors and version conrol problems
+- _Concurrency Issues_, leading to corruption of state file when concurrent users apply changes as Local system doesn't have builtin mechanisms
+- _Data Loss_, making it difficult infrastructure
+
+### Remote State
+
+Storing state file in remote makes it easy of multiple people/teams to access it. State file can be stored in multiple locations like Amazon s3 Bucket, Google Cloud Storage, etc. This makes it possible to overcome the challenges of local state files and teams can access and collaborate without issues and conflicts of infrastructure
+
+_Task_: Created S3 Bucket and moved `terraform.tfstate` to S3 Bucket - tf-demo-s3-bucket-0544
+
+**State Locking**: Locking the Terraform State will prevent concurrent modifications to state file making it possible to avoid conflicts and inconsistent infrastructure. This makes it possible for only one user or process to modify the state file. This is achieved with Dynamo DB table (in AWS)
+
+When `terraform plan` or `terraform apply` is run, it will say "Aquiring state lock" making it not possible for other to change the state file. Lock will be released after the changes are made in the state file
+
+**Remote Backend State Options**
+
+- Amazon S3
+- Azure Storage,
+- Google Cloud Storage
+- HTTP Backend
+- HashiCorp Consul
+- Terraform Cloud
+- Artifactory (JFrog)
+
+## Resource Drift
+
+- Case when actual infrastructure is different from what Terraform expects (based on coniguration files)
+- Can be due to manual changes to infrastructure, updates out of Terraform. These can be identified with `terraform plan -refresh-only` and make changes accordingly
