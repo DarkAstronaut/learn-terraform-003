@@ -93,3 +93,33 @@ When `terraform plan` or `terraform apply` is run, it will say "Aquiring state l
 
 - Case when actual infrastructure is different from what Terraform expects (based on coniguration files)
 - Can be due to manual changes to infrastructure, updates out of Terraform. These can be identified with `terraform plan -refresh-only` and make changes accordingly
+
+# Understanding Terraform Configuration
+
+## Variables
+
+- Placeholders for values in the infrastructure code which can be modified to use in multiple cases
+- Adds flexibility to customize and modify based on the need
+
+### Variable Types
+
+- String
+- Number
+- List
+- Map
+
+Variables are assigned in configuration file, saperate variables file or through command-line flags.
+
+_Note_: It is suggested to declare variables in a seperate `variables.tf` file and access them in `main.tf` using `var.<variable_name>`
+
+## Outputs
+
+- Used to display specific values of the resources handled by the Terraform
+- These values can act as inputs or bridge to the other elements for the infrastructure
+- Values obtained from Outputs can be parts of configuration file, data sources and complex expressions
+
+It is preferred that Outputs are written in `output.tf` file
+
+## `.tfvars`
+
+`terraform.tfvars` is a file created to assign values to the variables whithout changing the configuration file. If there is a need to change the values of the variables and want to overwrite the default values mentioned in `variables.tf`, it is advised to use `terrafrom.tfvars`.

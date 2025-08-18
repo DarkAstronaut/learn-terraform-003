@@ -7,3 +7,11 @@ resource "aws_instance" "my-existing-ec2" {
     Name = "FirstEC2Instance"
   }
 }
+
+# For Understanding Variables
+
+resource "aws_s3_bucket" "tf-bucket" {
+  bucket = var.bucket_name
+
+  tags = var.tags
+}
