@@ -123,3 +123,39 @@ It is preferred that Outputs are written in `output.tf` file
 ## `.tfvars`
 
 `terraform.tfvars` is a file created to assign values to the variables whithout changing the configuration file. If there is a need to change the values of the variables and want to overwrite the default values mentioned in `variables.tf`, it is advised to use `terrafrom.tfvars`.
+
+## Secure Secret Injection - Best Practices
+
+Data provided to Terraform may contain sensitive information such as API Tokens, Application Passwords, Authentication Credentials to configure resources
+
+### Best Practices
+
+1. Avoid Stroing Sensitive Information in `.tfvars` File, as it could be part of VCS and everyone can see sensitive information
+2. Mark Variables and Outputs as Sensitive, by setting `sensitive = true` these values are not displayed in terminals or logs (even though it doesn't provide encryption, it hides the sensitive information in Terraform)
+3. Secure Terraform State with Encryption at Rest, as sensitive data can be stored in state file, it is important to encrypt it to prevent unauthorized access
+4. Using Environment Variables, which prevents exposure of sensitive data. Terrafrom Environment Variables can be created by running the command `$ export TF_VAR_<variable_name>="<value>"` where _variable name_ matches the varialbe declared in `variables.tf` file
+5. Using a Secrets Manager, like
+   - HashiCorp Vault
+   - AWS Key Management Service (KMS)
+   - AWS Systems Manager Paramenter Store (SSM Paramenter Store)
+   - Azure Key Vault
+6. Regularly Rotate Secrets and Credential, which is achieved with Secrets Manager
+
+## Terraform Data Types
+
+### Primitive Datatypes
+
+- String
+- Boolean
+- Number
+
+### Collection Types
+
+- List
+- Map
+- Set
+
+### Structural Types
+
+- Objects
+- Tuple
