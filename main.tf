@@ -41,3 +41,47 @@ resource "aws_db_instance" "tf-sample-db" {
   password = var.database_pw
   parameter_group_name = "default.mysql5.7"
 }
+
+
+/*
+# Example for 'count' Argument 
+
+resource "aws_instance" "multi_web_servers" {
+  count = 4 # Creates 4 AWS Instances
+  ami           = "ami-08ca1d1e465fbfe0c"
+  instance_type = "t3.micro"
+
+  tags = {
+    Name = "web-server-${count.index + 1}" # Adding Number based on 'count' for the Name
+  }
+
+}
+####
+# The Above Block Creates 4 AWS Instance of t3.micro Type with tag names
+# web-server-1
+# web-server-2
+# web-server-3
+# web-server-4
+####
+*/
+
+/*
+# Example for 'for_each' Argument 
+
+variable "instance_types" {
+  type = set(string)
+  default = ["t3.micro", "t3.samll", "t3.large"]
+}
+
+resource "aws_instance" "multi_web_servers" {
+  for_each = var.instance_types
+  ami           = "ami-08ca1d1e465fbfe0c"
+  instance_type = each.key 
+}
+####
+# The Above Block Creates 3 AWS Instance of types
+# t3.micro
+# t3.small
+# t3.large
+####
+*/

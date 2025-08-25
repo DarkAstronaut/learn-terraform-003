@@ -184,3 +184,21 @@ resource "aws_instance" "sample" {
     }
 }
 ```
+
+- `prevent_destroy`, doesn't destroy the resource safeguarding from accidental destruction of resource
+- `ignore_changes`, prevents unwanted modification of the resource, helping to keep the settings changes which are modified later
+- `replace_triggered_by`, specify conditions to replace the resource
+
+**Resource Dependency**, are used when directly mentioning that creation of a resource depends on a created or existing resource. For example, creation of an _AWS Instance_ could depend on _AWS Security Group_ and Terraform must create the Security Group before creating the Instance. This is achieved with `depends_on` in the resource block
+
+### Looping and Multiple Instances
+
+Used for creating or modifying multiple copies / duplicates of a resource, module or data source
+
+- with `count` Meta-argumnet, multiple resource based on the number provided
+- with `for_each` Meta-argument, multiple resource based on the set values which iterates for each value in the set
+
+**Resource Addressing** is constructed with string comprising of 2 essential components:
+
+- Module Path, signify the location within the hieraical structure of modules
+- Resource Specification, addressed with `<resource_type>.<resource_name>[N]` (N is for index if resource of count-based)
