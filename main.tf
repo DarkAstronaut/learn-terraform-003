@@ -6,6 +6,19 @@ resource "aws_instance" "my-existing-ec2" {
   tags = {
     Name = "FirstEC2Instance"
   }
+  /*
+  lifecycle {
+    create_before_destroy = true # Creation before Destroying Existing Resource
+    prevent_destroy = true # Stops Resource Destruction
+    ignore_changes = [
+      tags,
+      instance_type
+    ]
+    replace_triggered_by = []
+  }
+
+  # depends_on = [aws_security_group.example_sec_grp]
+  */
 }
 
 # For Understanding Variables

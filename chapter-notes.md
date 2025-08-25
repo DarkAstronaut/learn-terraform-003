@@ -159,3 +159,28 @@ Data provided to Terraform may contain sensitive information such as API Tokens,
 
 - Objects
 - Tuple
+
+## Resources
+
+A Resource is a infrastructure element that is created by Terraform. Each Resource has Resource Name (name of the resource created) and Resource Attributes (settings under each resource).
+
+```
+resource "<resource_type>" "<resource_name>" {
+    <attribute_1> = <value_1>
+    <attribute_2> = <value_2>
+}
+
+```
+
+The `lifecycle` **Meta-Argument** in Terraform allows changing the resource behavior when `terraform apply` is execcuted. It has following arguments:
+
+- `create_before_destroy`, determining order of creation and destruction of resources, making is helful to check if creation of a new resource is possible before destroying existing resource
+
+```
+resource "aws_instance" "sample" {
+    # ...
+    lifecycle {
+        create_before_destroy = true
+    }
+}
+```
