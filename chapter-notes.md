@@ -202,3 +202,21 @@ Used for creating or modifying multiple copies / duplicates of a resource, modul
 
 - Module Path, signify the location within the hieraical structure of modules
 - Resource Specification, addressed with `<resource_type>.<resource_name>[N]` (N is for index if resource of count-based)
+
+## Terraform Functions
+
+Terraform has built-in functions that can be used with expressions to interact withdata, manipulate configuration. Terraform funtions can be executed in terminal with `terraform console` command
+
+**Built-In Functions**, (Examples in _functions.tf_ file)
+
+- Numeric
+- String, to manipulate and transform strings
+- Collection, to manipulate collections like lists, sets, maps, ...
+- Type Conversion
+- Encoding
+- Filesystem
+- Data and Time
+- Hash and Crypto
+- IP Network
+
+Find more at https://developer.hashicorp.com/terraform/language/functions
