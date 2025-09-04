@@ -17,7 +17,7 @@ resource "aws_instance" "my-existing-ec2" {
     replace_triggered_by = []
   }
 
-  # depends_on = [aws_security_group.example_sec_grp]
+  # depends_on = [aws_security_group.example_sec_grp] // Also Explicit Dependency
   */
 }
 
@@ -85,3 +85,7 @@ resource "aws_instance" "multi_web_servers" {
 # t3.large
 ####
 */
+
+resource "aws_eip" "ec2-IP" {
+  instance = aws_instance.my-existing-ec2.id // Implicit Dependency
+}

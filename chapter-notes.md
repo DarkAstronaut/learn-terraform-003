@@ -92,7 +92,7 @@ When `terraform plan` or `terraform apply` is run, it will say "Aquiring state l
 ## Resource Drift
 
 - Case when actual infrastructure is different from what Terraform expects (based on coniguration files)
-- Can be due to manual changes to infrastructure, updates out of Terraform. These can be identified with `terraform plan -refresh-only` and make changes accordingly
+- Can be due to manual changes to infrastructure, updates out of Terraform. These can be identified with `terraform plan -refresh-only` and make changes accordingly in State file with `terraform apply -refresh-only`
 
 # Understanding Terraform Configuration
 
@@ -220,3 +220,13 @@ Terraform has built-in functions that can be used with expressions to interact w
 - IP Network
 
 Find more at https://developer.hashicorp.com/terraform/language/functions
+
+## Bulid-In Dependency Management
+
+**Dependencies** are relationship between resources and configuration, used by Terraform to determine the order of resource creation and modification
+
+### Types of Dependencies
+
+**Implicit Dependency** - Dependencies in Terraform that are inferred by Terraform based on how Resources are referred within the configuration file (Example in `main.tf`)
+
+**Explicit Dependency** - Dependencies that are defiened exxplicitly with `depends_on` paramenter (Example in `main.tf`), giving control over order of resource creation, provision and destruction
