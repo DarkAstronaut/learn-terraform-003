@@ -1,3 +1,4 @@
+/*
 # Functions; can be executed with `terraform console` command
 ## Numeric ##
 #############
@@ -48,13 +49,12 @@ chomp(str) - Removes Tailing NewLine Character from String 'str'
 > chomp("Hello World\n")
 "Hello World"
 // Not Sure what is does with Multiple Lines?
-/*
 > chomp("Hello World \nSecond Line")
 <<EOT
 Hello World
 Second Line
 EOT
-*/
+
 
 startswith(str, st) - Checks if String 'str' starts with String 'st'
 ### Example
@@ -230,10 +230,8 @@ coalescelist(m, n, p, ...) - Retruns first non-empty List from the Lists 'm', 'n
   4,
 ]
 // Cannot use colesce() function for the same case, Returns as Follows:
-/*
 > coalesce([],[],[3,4],[],[2,1])
 tolist([])
-*/
 
 compact(ls) - Removes Null Items from the List 'ls' and Returns all the Remaining Elements
             - Converts Number Items to String in the Process
@@ -314,3 +312,4 @@ index(ls, ele) - Returns the First occurane location of Element 'ele' in List 'l
 3
 
 // Skipped Other Stuff and Told to Refer URL in the Video
+*/

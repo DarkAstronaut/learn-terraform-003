@@ -230,3 +230,38 @@ Find more at https://developer.hashicorp.com/terraform/language/functions
 **Implicit Dependency** - Dependencies in Terraform that are inferred by Terraform based on how Resources are referred within the configuration file (Example in `main.tf`)
 
 **Explicit Dependency** - Dependencies that are defiened exxplicitly with `depends_on` paramenter (Example in `main.tf`), giving control over order of resource creation, provision and destruction
+
+# Terraform Cloud
+
+Terraform Cloud is SaaS Application that helps teams to use Terraform together by providing centralized environment for managing IaC across various cloud providers and on-premise environment, Terraform Cloud manages the State File (More at https://developer.hashicorp.com/terraform/cloud-docs)
+
+- Organization - Top Level Container to managae Infrastructure
+- Run - Execution of Terraform Configuration, records Creation, Updation and Deletion of Resources
+
+## Features
+
+- Manage Terraform State Files
+- Show Histroy / Previous Runs for State
+- Variable Management
+- Cost Estimation
+- Specify version of Terraform per Workspace
+- Notifications via Webhook Level
+- Permissions Management (Organization-level and Workspace-level)
+- Global State Sharing
+- Policy as Code (with Sentinel Policy Sets)
+- Multifactor Authentication
+- Single Sign-On / SSO (at paid tier)
+- Integration with ServiceNow, Custom-Run Tasks, Kubernetes, etc.
+
+## Collaboration Tools
+
+- As a Centralized Platform, it offers
+
+  - Role-based Access Control (RBAC)
+  - Version Histroy
+  - Workspace Management
+
+- For Governance, Key Features are
+  - Policy Enforcement
+  - Compliance Monitoring
+  - Audit Logging
